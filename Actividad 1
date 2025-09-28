@@ -1,0 +1,77 @@
+package MarcoTeorico;
+
+//Definición de la excepción personalizada
+class InvalidSubscriptException extends Exception {
+	public InvalidSubscriptException(String mensaje) {
+		super(mensaje);
+	}
+}
+
+package MarcoTeorico;
+
+public class PruebaMetodoGenerico {
+
+	 // Método genérico para imprimir el arreglo completo
+	 public static <E> void imprimirArreglo(E[] arregloEntrada) {
+	     // Muestra los elementos del arreglo
+	     for (E elemento : arregloEntrada) {
+	         System.out.printf("%s ", elemento);
+	     }
+	     System.out.println();
+	 }
+
+	 // Sobrecarga del método para imprimir una parte del arreglo, entre los índices dados
+	 public static <E> int imprimirArreglo(E[] arregloEntrada, int subindiceInferior, int subindiceSuperior) throws InvalidSubscriptException {
+	     // Validar que los índices estén dentro del rango permitido
+	     if (subindiceInferior < 0 || subindiceSuperior >= arregloEntrada.length || subindiceSuperior <= subindiceInferior) {
+	         throw new InvalidSubscriptException("Índices fuera de rango o subindiceSuperior no es mayor que subindiceInferior.");
+	     }
+
+	     // Imprimir solo la parte del arreglo entre los índices
+	     int cantidadElementosImpresos = 0;
+	     for (int i = subindiceInferior; i <= subindiceSuperior; i++) {
+	         System.out.printf("%s ", arregloEntrada[i]);
+	         cantidadElementosImpresos++;
+	     }
+	     System.out.println();
+	     return cantidadElementosImpresos;
+	 }
+
+	 public static void main(String args[]) {
+	     // Crea arreglos de objetos Integer, Double y Character
+	     Integer[] arregloInteger = { 1, 2, 3, 4, 5, 6 };
+	     Double[] arregloDouble = { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7 };
+	     Character[] arregloCharacter = { 'H', 'O', 'L', 'A' };
+
+	     try {
+	         // Imprimir los arreglos completos
+	         System.out.println("El arreglo arregloInteger contiene:");
+	         imprimirArreglo(arregloInteger); // Pasa un arreglo Integer
+
+	         System.out.println("\nEl arreglo arregloDouble contiene:");
+	         imprimirArreglo(arregloDouble); // Pasa un arreglo Double
+
+	         System.out.println("\nEl arreglo arregloCharacter contiene:");
+	         imprimirArreglo(arregloCharacter); // Pasa un arreglo Character
+
+	         // Imprimir parte del arreglo entre índices específicos
+	         System.out.println("\nImprimiendo parte del arreglo arregloInteger entre índices 1 y 4:");
+	         int cantidadImpresosInteger = imprimirArreglo(arregloInteger, 1, 4); // Imprime entre índices 1 y 4
+	         System.out.println("Cantidad de elementos impresos en arregloInteger: " + cantidadImpresosInteger);
+
+	         System.out.println("\nImprimiendo parte del arreglo arregloDouble entre índices 2 y 5:");
+	         int cantidadImpresosDouble = imprimirArreglo(arregloDouble, 2, 5); // Imprime entre índices 2 y 5
+	         System.out.println("Cantidad de elementos impresos en arregloDouble: " + cantidadImpresosDouble);
+
+	         System.out.println("\nImprimiendo parte del arreglo arregloCharacter entre índices 0 y 2:");
+	         int cantidadImpresosCharacter = imprimirArreglo(arregloCharacter, 0, 2); // Imprime entre índices 0 y 2
+	         System.out.println("Cantidad de elementos impresos en arregloCharacter: " + cantidadImpresosCharacter);
+
+	         // En caso se quiera acceder a un valor fuera de rango
+	         //si subindiceSuperior es menor o igual a subindiceInferio
+	     } catch (InvalidSubscriptException e) {  
+	         // Muestra el mensaje de la excepción si ocurre
+	         System.out.println(e.getMessage());
+	     }
+	 }
+}
