@@ -1,0 +1,38 @@
+package MarcoTeorico;
+
+public class Pila< E > {
+        private final int tamanio; // número de elementos en la pila
+        private int superior; // ubicación del elemento superior
+        private E[] elementos; // arreglo que almacena los elementos de la pila
+
+        // el constructor sin argumentos crea una pila del tamaño predeterminado
+        public Pila(){
+            this( 10 ); // tamaño predeterminado de la pila
+        } // fin del constructor de MarcoTeorico.Pila sin argumentos
+
+        // constructor que crea una pila del número especificado de elementos
+        public Pila( int s ) {
+        	// Si s > 0 es verdadero, entonces tamanio = s.
+        	// Si s > 0 es falso, entonces tamanio = 10.
+            tamanio = s > 0 ? s : 10; // establece el tamaño de la MarcoTeorico.Pila
+            superior = -1; // al principio, la MarcoTeorico.Pila está vacía
+            elementos = ( E[] ) new Object[ tamanio ]; // crea el arreglo
+        } // fin del constructor de MarcoTeorico.Pila sin argumentos
+
+        // mete un elemento a la pila; si tiene éxito, devuelve verdadero;
+        // en caso contrario, lanza excepción MarcoTeorico.ExcepcionPilaLlena
+        public void push( E valorAMeter )  {
+            if ( superior == tamanio - 1 ) // si la pila está llena
+                throw new ExcepcionPilaLlena( String.format(
+                    "La MarcoTeorico.Pila esta llena, no se puede meter %s", valorAMeter ) );
+
+            elementos[ ++superior ] = valorAMeter; // coloca valorAMeter en la MarcoTeorico.Pila
+            } // fin del método push
+
+        // devuelve el elemento superior si no está vacía; de lo contrario lanza MarcoTeorico.ExcepcionPilaVacia
+     public E pop(){
+            if ( superior == -1 ) // si la pila está vacía
+                throw new ExcepcionPilaVacia( "La MarcoTeorico.Pila esta vacia, no se puede sacar" );
+            return elementos[ superior-- ]; // elimina y devuelve el elemento superior de la MarcoTeorico.Pila
+            } // fin del método pop
+ } // fin de la clase MarcoTeorico.Pila< E >
