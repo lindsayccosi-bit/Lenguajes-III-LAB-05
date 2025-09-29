@@ -1,0 +1,44 @@
+package acti3;
+
+public class IgualGenerico {
+
+    // Método genérico que compara dos objetos usando equals
+    public static <T> boolean esIgualA(T a, T b) {
+        if (a == null && b == null) {
+            return true; // dos null son iguales
+        }
+        if (a == null || b == null) {
+            return false; // uno es null y el otro no
+        }
+        return a.equals(b); // usa equals para la comparación
+    }
+
+    public static void main(String[] args) {
+        // Pruebas con diferentes tipos
+
+        // Tipos primitivos envueltos (Integer, Double, etc.)
+        System.out.println("Integer: " + esIgualA(5, 5)); // true
+        System.out.println("Double: " + esIgualA(3.14, 3.14)); // true
+
+        // Strings
+        System.out.println("String: " + esIgualA("hola", "hola")); // true
+        System.out.println("String diferente: " + esIgualA("hola", "mundo")); // false
+
+        // Null
+        System.out.println("Ambos null: " + esIgualA(null, null)); // true
+        System.out.println("Uno null: " + esIgualA(null, "algo")); // false
+
+        // Object genérico
+        Object obj1 = new Object();
+        Object obj2 = obj1;
+        Object obj3 = new Object();
+
+        System.out.println("Mismo objeto: " + esIgualA(obj1, obj2)); // true
+        System.out.println("Objetos distintos: " + esIgualA(obj1, obj3)); // false
+
+        // Integer explícito
+        Integer x = 100;
+        Integer y = 100;
+        System.out.println("Integer (100,100): " + esIgualA(x, y)); // true
+    }
+}
