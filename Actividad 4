@@ -67,3 +67,38 @@ public class Pila<E> {
         return true; // si todos coinciden
     }
 }
+
+
+package act4;
+
+public class PruebaPila {
+    public static void main(String[] args) {
+        // Crear dos pilas de enteros
+        Pila<Integer> pila1 = new Pila<>(5);
+        Pila<Integer> pila2 = new Pila<>(5);
+
+        // Agrega los mismos elementos
+        pila1.push(10);
+        pila1.push(20);
+        pila1.push(30);
+
+        pila2.push(10);
+        pila2.push(20);
+        pila2.push(30);
+
+        // Compara
+        System.out.println("¿pila1 es igual a pila2? " + pila1.esIgual(pila2));
+
+        // Modifica una pila
+        pila2.pop();   // elimina el 30
+        pila2.push(40);
+
+        // Compara nuevamente
+        System.out.println("¿pila1 es igual a pila2? " + pila1.esIgual(pila2));
+
+        // Prueba con pilas vacías
+        Pila<String> pila3 = new Pila<>(3);
+        Pila<String> pila4 = new Pila<>(3);
+        System.out.println("¿pila3 es igual a pila4? " + pila3.esIgual(pila4));
+    }
+}
