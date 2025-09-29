@@ -1,0 +1,69 @@
+package act4;
+
+class ExcepcionPilaLlena extends RuntimeException {
+    public ExcepcionPilaLlena(String mensaje) {
+        super(mensaje);
+    }
+}
+
+
+//Clase de excepción cuando la pila está vacía
+class ExcepcionPilaVacia extends RuntimeException {
+ public ExcepcionPilaVacia(String mensaje) {
+     super(mensaje);
+ }
+}
+
+package act4;
+
+public class Pila<E> {
+    private final int tamanio; // número de elementos en la pila
+    private int superior;      // ubicación del elemento superior
+    private E[] elementos;     // arreglo que almacena los elementos de la pila
+
+    public Pila() {
+        this(10);
+    }
+
+    public Pila(int s) {
+        tamanio = s > 0 ? s : 10;
+        superior = -1;
+        elementos = (E[]) new Object[tamanio];
+    }
+
+    public void push(E valorAMeter) {
+        if (superior == tamanio - 1)
+            throw new ExcepcionPilaLlena(String.format(
+                "La pila está llena, no se puede meter %s", valorAMeter));
+
+        elementos[++superior] = valorAMeter;
+    }
+
+    public E pop() {
+        if (superior == -1)
+            throw new ExcepcionPilaVacia("La pila está vacía, no se puede sacar");
+        return elementos[superior--];
+    }
+
+    //  Método genérico para comparar dos pilas
+    public boolean esIgual(Pila<E> otraPila) {
+        // Si se tiene diferente cantidad de elementos, no son iguales
+        if (this.superior != otraPila.superior) {
+            return false;
+        }
+
+        // Se compara elemento por elemento
+        for (int i = 0; i <= this.superior; i++) {
+            E elem1 = this.elementos[i];
+            E elem2 = otraPila.elementos[i];
+
+            if (elem1 == null && elem2 == null) {
+                continue; // ambos nulos son iguales
+            }
+            if (elem1 == null || !elem1.equals(elem2)) {
+                return false; // diferentes
+            }
+        }
+        return true; // si todos coinciden
+    }
+}
