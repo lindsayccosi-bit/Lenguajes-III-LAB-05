@@ -1,0 +1,115 @@
+package ejercicio1;
+
+import java.util.ArrayList;
+
+public class Contenedor<F, S> {
+    private ArrayList<Par<F, S>> pares;
+    
+    // Constructor
+    public Contenedor() {
+        this.pares = new ArrayList<>();
+    }
+    
+  
+    public void agregarPar(F primero, S segundo) {  //Permite añadir un nuevo par al contenedor
+        Par<F, S> nuevoPar = new Par<>(primero, segundo);  // Primero el 1er elemento del par y luego el 2do
+        pares.add(nuevoPar);
+    }
+    
+  
+    public Par<F, S> obtenerPar(int indice) { // Devuelve el par en la posicion que se especifica
+        if (indice < 0 || indice >= pares.size()) {    // valida que el indice sea un valor correcto
+            throw new IndexOutOfBoundsException("Índice fuera de rango: " + indice);
+        }
+        return pares.get(indice);   
+    }
+    
+
+    public ArrayList<Par<F, S>> obtenerTodosLosPares() {  // devuelve la lista completa de pares
+        return new ArrayList<>(pares); // Retorna una copia para proteger la lista original
+    }
+    
+ 
+    public void mostrarPares() {  //  Imprime todos los pares almacenados en el contenedor
+        if (pares.isEmpty()) {
+            System.out.println("El contenedor está vacío.");
+            return;
+        }
+        
+        System.out.println(" PARES EN EL CONTENEDOR");
+        for (int i = 0; i < pares.size(); i++) {
+            System.out.println((i + 1) + ". " + pares.get(i));
+        }
+        System.out.println("Total: " + pares.size() + " pares"); // muestra cantidad de pares
+    }
+    
+ 
+    public int cantidadPares() {
+        return pares.size();  // devuelve la cantidad de pares en el contenedor
+    }
+    
+
+    public Par<F, S> eliminarPar(int indice) {  // elimina un par por índice
+        if (indice < 0 || indice >= pares.size()) {
+            throw new IndexOutOfBoundsException("Índice fuera de rango: " + indice);
+        }
+        return pares.remove(indice);   // elimina par
+    }
+    
+  
+    public boolean estaVacio() {   // verifica si el contenedor está vacío
+        return pares.isEmpty();
+    }
+}
+
+package ejercicio1;
+
+import java.util.ArrayList;
+
+public class PruebaContenedor {
+    public static void main(String[] args) {
+        // Contenedor de String-Integer
+        Contenedor<String, Integer> contenedorPersonas = new Contenedor<>();
+        
+        // Agrega pares al contenedor
+        System.out.println(" AGREGANDO PARES ");
+        contenedorPersonas.agregarPar("Juan", 25);
+        contenedorPersonas.agregarPar("María", 30);
+        contenedorPersonas.agregarPar("Carlos", 22);
+        contenedorPersonas.agregarPar("Ana", 28);
+        
+        // Muestra todos los pares
+        contenedorPersonas.mostrarPares();
+        
+        // Obtiene un par específico
+        System.out.println("\n OBTENER PAR ESPECÍFICO ");
+        Par<String, Integer> par2 = contenedorPersonas.obtenerPar(1);
+        System.out.println("Par en índice 1: " + par2);
+        
+        // Obtiene todos los pares
+        System.out.println("\n OBTENER TODOS LOS PARES ");
+        ArrayList<Par<String, Integer>> todosLosPares = contenedorPersonas.obtenerTodosLosPares();
+        for (Par<String, Integer> par : todosLosPares) {
+            System.out.println(par);
+        }
+        
+        // Prueba con otro tipo de contenedor
+        System.out.println("\n CONTENEDOR DE DOUBLE-BOOLEAN ");
+        Contenedor<Double, Boolean> contenedorNumeros = new Contenedor<>();
+        contenedorNumeros.agregarPar(3.14, true);
+        contenedorNumeros.agregarPar(2.71, false);
+        contenedorNumeros.agregarPar(1.41, true);
+        contenedorNumeros.mostrarPares();
+        
+        // Prueba métodos adicionales
+        System.out.println("\n MÉTODOS ADICIONALES");
+        System.out.println("Cantidad de pares en contenedor personas: " + contenedorPersonas.cantidadPares());
+        System.out.println("¿Está vacío el contenedor? " + contenedorPersonas.estaVacio());
+        
+        // Elimina un par
+        Par<String, Integer> eliminado = contenedorPersonas.eliminarPar(0);
+        System.out.println("Par eliminado: " + eliminado);
+        contenedorPersonas.mostrarPares();
+    }
+}
+
