@@ -1,0 +1,61 @@
+package ejercicio1;
+
+public class Par <F,S> {
+	private F primero;
+	private S segundo;
+	
+	public Par(F primero, S segundo) {
+		this.primero= primero;
+		this.segundo = segundo;
+	}
+	
+	// Metodos get
+	
+	public F getPrimero () {
+		return primero;
+	}
+	
+	public S getSegundo () {
+		return segundo;
+	}
+	
+	// Metodos set
+	
+	public void setPrimero(F primero) {
+		this.primero = primero;
+	}
+	
+	public void setSegundo(S segundo) {
+		this.segundo = segundo;
+	}
+	
+	// Metodo toString
+	
+	public String toString() {
+		return "(Primero: " + primero + ", Segundo: " + segundo + ")" ;
+	}
+
+}
+
+
+package ejercicio1;
+
+public class Main {
+	public static void main(String[] args) {
+		// Caso 1: Par String y Integer
+		Par<String, Integer> par1 = new Par<> ("Juan", 25);
+		System.out.println(par1.toString()); //(Primero: Juan, Segundo: 25)
+		
+		// Caso 2: Par Integer  y double
+		Par<Integer, Double> par2 = new Par<> (22, 21.5);
+		System.out.println(par2.getPrimero()); // 22
+		System.out.println(par2.getSegundo()); // 21.5
+		
+		// Caso modificando valores
+		par2.setPrimero(30);
+		par2.setSegundo(24.5);
+		System.out.println(par2.toString()); // (Primero: 30, Segundo: 24.5)
+	}
+
+}
+
