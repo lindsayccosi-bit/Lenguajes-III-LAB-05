@@ -1,0 +1,89 @@
+package ejercicio1;
+
+public class Par <F,S> {
+	private F primero;
+	private S segundo;
+	
+	public Par(F primero, S segundo) {
+		this.primero= primero;
+		this.segundo = segundo;
+	}
+	
+	// Metodos get
+	
+	public F getPrimero () {
+		return primero;
+	}
+	
+	public S getSegundo () {
+		return segundo;
+	}
+	
+	// Metodos set
+	
+	public void setPrimero(F primero) {
+		this.primero = primero;
+	}
+	
+	public void setSegundo(S segundo) {
+		this.segundo = segundo;
+	}
+	
+	// Metodo toString
+	
+	public String toString() {
+		return "(Primero: " + primero + ", Segundo: " + segundo + ")" ;
+	}
+	
+	// Metodo es igual
+	
+	public boolean esIgual(Par<F, S> otroPar) {
+		if (otroPar == null) {
+			return false;
+		}
+		return this.primero.equals(otroPar.primero) && this.segundo.equals(otroPar.segundo);
+	}
+
+}
+
+
+package ejercicio1;
+
+public class Main {
+	public static void main(String[] args) {
+		// Caso 1: Par String y Integer
+		Par<Integer, Integer> par1 = new Par<> (20, 25);
+		Par<Integer, Integer> par2 = new Par<> (28, 21);
+		Par<Integer, Integer> par3 = new Par<> (19, 25); 
+		Par<Integer, Integer> par4 = new Par<> (43, 11);
+		Par<Integer, Integer> par5 = new Par<> (20, 25);
+		
+		
+		System.out.println("Pruebas con pares de Integer");
+        System.out.println("Par1: " + par1);
+        System.out.println("Par2: " + par2);
+        System.out.println("Par3: " + par3);
+        System.out.println("Par4: " + par4);
+		
+        System.out.println("COMPARACIONES");
+        System.out.println("Par1 es igual a par2: "+ par1.esIgual(par2)); // false
+        System.out.println("Par1 es igual a par3: " + par1.esIgual(par3)); // false
+        System.out.println("Par1 es igual a par4: " + par1.esIgual(par4)); // false
+        System.out.println("Par1 es igual a par5: " + par1.esIgual(par5)); // true
+        
+     // Pares de diferentes tipos
+        Par<String, Integer> par6 = new Par<>("Juan", 25);
+        Par<String, Integer> par7 = new Par<>("Juan", 25);
+        Par<String, Integer> par8 = new Par<>("María", 30);
+        
+        System.out.println("\n Pruebas con pares de String-Integer ");
+        System.out.println("Par6: " + par6);
+        System.out.println("Par7: " + par7);
+        System.out.println("Par8: " + par8);
+        
+        System.out.println("\nComparaciones:");
+        System.out.println("Par6 es igual a par7: " + par6.esIgual(par7)); // true
+        System.out.println("Par6 es igual a par8: " + par6.esIgual(par8)); // false
+	}
+
+}
